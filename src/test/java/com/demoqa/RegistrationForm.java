@@ -14,8 +14,8 @@ public class RegistrationForm {
                email = "Test@yandex.ru",
                subjects = "Math",
                mobile = "9998887766",
-               pictureName = "IMG_3316.jpg",
-               picture = "D:\\Java\\" + pictureName,
+               pictureName = "smile.png",
+               picturePath = "src/images/" + pictureName,
                address = "Moscow, some address";
 
 
@@ -38,7 +38,7 @@ public class RegistrationForm {
 
         $("#subjectsInput").setValue(subjects).pressEnter(); // Subjects
         $("#hobbiesWrapper .col-md-9 .custom-control:nth-child(1)").click(); // Hobbies
-        $("#uploadPicture").uploadFile(new File(picture)); // Picture
+        $("#uploadPicture").uploadFile(new File(picturePath)); // Picture
         $("#currentAddress").setValue(address); // Current address
         // State and city
         $("#state").scrollTo().click();
