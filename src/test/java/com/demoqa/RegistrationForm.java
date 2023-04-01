@@ -15,7 +15,7 @@ public class RegistrationForm {
                subjects = "Math",
                mobile = "9998887766",
                pictureName = "smile.png",
-               picturePath = "src/images/" + pictureName,
+               picturePath = "src/resources/images/" + pictureName,
                address = "Moscow, some address";
 
 
