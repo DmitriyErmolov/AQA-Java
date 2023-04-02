@@ -1,10 +1,18 @@
 package com.demoqa;
+import com.codeborne.selenide.Configuration;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import java.io.File;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
-public class RegistrationForm {
+public class RegistrationFormTest {
+    @BeforeAll
+    static void beforeALL() {
+        Configuration.baseUrl = "https://demoqa.com";
+        Configuration.browserSize = "1920x1080";
+        Configuration.holdBrowserOpen = true;
+    }
 
     @Test
     void smokeTest(){
@@ -15,32 +23,31 @@ public class RegistrationForm {
                subjects = "Math",
                mobile = "9998887766",
                pictureName = "smile.png",
-               picturePath = "src/resources/images/" + pictureName,
+               picturePath = "src/test/resources/images/" + pictureName,
                address = "Moscow, some address";
 
-
-        // Открыть сайт https://demoqa.com/automation-practice-form
-        open("https://demoqa.com/automation-practice-form");
-        // Скрыть футер
+        open( "/automation-practice-form");
+        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
+        // Hide footer and ads
         executeJavaScript("$('footer').remove()");
         executeJavaScript("$('#fixedban').remove()");
 
-        $("#firstName").setValue(firstName); // First name
-        $("#lastName").setValue(lastName); // Last name
-        $("#userEmail").setValue(email); // Email
-        $("#genterWrapper .custom-control:nth-child(1)").click(); // Gender
-        $("#userNumber").setValue(mobile); //Mobile
-        // Date of Birth
+        $("#firstName").setValue(firstName); // input First name
+        $("#lastName").setValue(lastName); // input Last name
+        $("#userEmail").setValue(email); // input Email
+        $("#genterWrapper .custom-control:nth-child(1)").click(); //choose Gender
+        $("#userNumber").setValue(mobile); // input Mobile
+        // choose Date of Birth
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").selectOption("October");
         $(".react-datepicker__year-select").selectOption("1995");
         $(".react-datepicker__month .react-datepicker__week:nth-child(5) .react-datepicker__day--031").click();
 
-        $("#subjectsInput").setValue(subjects).pressEnter(); // Subjects
-        $("#hobbiesWrapper .col-md-9 .custom-control:nth-child(1)").click(); // Hobbies
-        $("#uploadPicture").uploadFile(new File(picturePath)); // Picture
-        $("#currentAddress").setValue(address); // Current address
-        // State and city
+        $("#subjectsInput").setValue(subjects).pressEnter(); // input Subjects
+        $("#hobbiesWrapper .col-md-9 .custom-control:nth-child(1)").click(); // choose Hobbies
+        $("#uploadPicture").uploadFile(new File(picturePath)); // upload Picture
+        $("#currentAddress").setValue(address); // input Current address
+        // choose State and city
         $("#state").scrollTo().click();
         $("#react-select-3-option-1").click();
         $("#city").click();
@@ -48,7 +55,7 @@ public class RegistrationForm {
 
         $("#submit").click(); // click the submit button
 
-        $(".table-responsive")
+        $(".table-responsive") // compare results
                 .shouldHave(text(firstName))
                 .shouldHave(text((lastName)))
                 .shouldHave((text("Male")))
@@ -60,7 +67,5 @@ public class RegistrationForm {
                 .shouldHave(text(address));
 
         $("#closeLargeModal").click(); // click the close button
-
-
     }
 }
