@@ -6,14 +6,7 @@ import java.io.File;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
-public class RegistrationFormTest {
-    @BeforeAll
-    static void beforeALL() {
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1920x1080";
-        Configuration.holdBrowserOpen = true;
-    }
-
+public class RegistrationFormTest extends TestBase{
     @Test
     void smokeTest(){
 
