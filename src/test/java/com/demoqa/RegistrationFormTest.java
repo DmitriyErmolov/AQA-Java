@@ -51,7 +51,7 @@ public class RegistrationFormTest extends TestBase{
         $(".table-responsive") // compare results
                 .shouldHave(text(firstName))
                 .shouldHave(text((lastName)))
-                .shouldHave((text("Male")))
+                .shouldHave((text("Male"))) // test
                 .shouldHave((text(mobile)))
                 .shouldHave(text("31 October,1995"))
                 .shouldHave(text(subjects))
